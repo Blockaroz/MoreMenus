@@ -11,7 +11,7 @@ namespace MoreMenus.Content
     {
         public override string DisplayName => "Cabin Font Logo";
 
-        public override Asset<Texture2D> Logo => ModContent.GetTexture("Blockaroz14Mod/Menus/tLogoText");
+        public override Asset<Texture2D> Logo => ModContent.GetTexture("MoreMenus/Assets/tLogoText");
 
         public override bool PreDrawLogo(SpriteBatch spriteBatch, ref Vector2 logoDrawCenter, ref float logoRotation, ref float logoScale, ref Color drawColor)
         {
@@ -23,9 +23,9 @@ namespace MoreMenus.Content
             for (int i = 0; i < 8; i++)
             {
                 Vector2 offset = Vector2.UnitY.RotatedBy(MathHelper.PiOver4 * i) * 2f;
-                spriteBatch.Draw(Logo.Value, logoDrawCenter + offset, null, PseudoBlack * 0.227f, logoRotation, Logo.Value.Size() / 2, logoScale, SpriteEffects.None, 0);
+                spriteBatch.Draw(Logo.Value, logoDrawCenter + offset, null, PseudoBlack * 0.227f, logoRotation, Logo.Size() / 2, logoScale, SpriteEffects.None, 0);
             }
-            spriteBatch.Draw(Logo.Value, logoDrawCenter, null, drawColor, logoRotation, Logo.Value.Size() / 2, logoScale, SpriteEffects.None, 0);
+            spriteBatch.Draw(Logo.Value, logoDrawCenter, null, drawColor, logoRotation, Logo.Size() / 2, logoScale, SpriteEffects.None, 0);
             return false;
         }
     }
