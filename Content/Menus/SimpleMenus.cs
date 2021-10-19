@@ -9,9 +9,9 @@ namespace MoreMenus.Content
 {
     public class TextMenu : ModMenu
     {
-        public override string DisplayName => "Cabin Font Logo";
+        public override string DisplayName => "Text Logo";
 
-        public override Asset<Texture2D> Logo => ModContent.GetTexture("MoreMenus/Assets/tLogoText");
+        public override Asset<Texture2D> Logo => Mod.Assets.Request<Texture2D>("Assets/General/TextMenuLogo");
 
         public override bool PreDrawLogo(SpriteBatch spriteBatch, ref Vector2 logoDrawCenter, ref float logoRotation, ref float logoScale, ref Color drawColor)
         {
@@ -28,5 +28,12 @@ namespace MoreMenus.Content
             spriteBatch.Draw(Logo.Value, logoDrawCenter, null, drawColor, logoRotation, Logo.Size() / 2, logoScale, SpriteEffects.None, 0);
             return false;
         }
+    }
+
+    public class ContagionMenu : ModMenu
+    {
+        public override string DisplayName => "Special Menu";
+
+        public override Asset<Texture2D> Logo => Mod.Assets.Request<Texture2D>("Assets/General/ContagionLogo");
     }
 }
