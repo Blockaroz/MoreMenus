@@ -15,11 +15,13 @@ namespace MoreMenus.Content
 
         public override bool PreDrawLogo(SpriteBatch spriteBatch, ref Vector2 logoDrawCenter, ref float logoRotation, ref float logoScale, ref Color drawColor)
         {
-            float wave0 = (float)Math.Sin(Main.GlobalTimeWrappedHourly / 1.9f) * 24;
-            logoDrawCenter = new Vector2(Main.screenWidth / 5f, Main.screenHeight / 2.2f + wave0);
+            if (ModContent.GetInstance<MenuConfig>().MenuOnLeft == true)
+                logoDrawCenter = new Vector2(Main.screenWidth / 5f, Main.screenHeight / 2.2f + ((float)Math.Sin(Main.GlobalTimeWrappedHourly / 1.9f) * 16));
+
             logoRotation = MathHelper.ToRadians((float)Math.Cos(Main.GlobalTimeWrappedHourly / 1.5f) * 10);
             drawColor = Color.White;
             Color PseudoBlack = new Color(0.137f, 0.137f, 0.176f);
+
             for (int i = 0; i < 8; i++)
             {
                 Vector2 offset = Vector2.UnitY.RotatedBy(MathHelper.PiOver4 * i) * 2f;
