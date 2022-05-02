@@ -31,11 +31,4 @@ namespace MoreMenus.Content
             return false;
         }
     }
-
-    public class ContagionMenu : ModMenu
-    {
-        public override string DisplayName => "Special Menu";
-
-        public override Asset<Texture2D> Logo => Mod.Assets.Request<Texture2D>("Assets/General/ContagionLogo");
-    }
 }
