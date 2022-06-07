@@ -1,4 +1,4 @@
 displayName = More Menus
 author = Blockaroz
-version = 1.0.4
+version = 1.0.5
 clientSide = true

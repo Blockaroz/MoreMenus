@@ -9,7 +9,7 @@ namespace MoreMenus.Content
 {
     public class FancyMenuPixeled : ModMenu
     {
-        public override string DisplayName => "Refresh Logo";
+        public override string DisplayName => "Refresh";
 
         public override bool PreDrawLogo(SpriteBatch spriteBatch, ref Vector2 logoDrawCenter, ref float logoRotation, ref float logoScale, ref Color drawColor)
         {
