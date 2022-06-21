@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace MoreMenus.Content
@@ -32,7 +33,7 @@ namespace MoreMenus.Content
     //    }
     //}
 
-    public class JungleLogoVanilla : ModMenu
+    public class JungleLogo : ModMenu
     {
         public override string DisplayName => "Jungle";
 
@@ -43,7 +44,32 @@ namespace MoreMenus.Content
             if (ModContent.GetInstance<MenuConfig>().MenuOnLeft == true)
                 logoDrawCenter = new Vector2(Main.screenWidth / 5f, Main.screenHeight / 2.2f + ((float)Math.Sin(Main.GlobalTimeWrappedHourly / 1.9f) * 16));
 
-            return true;
+            spriteBatch.Draw(Logo.Value, logoDrawCenter, null, drawColor * (Main.LogoA / 255f), logoRotation, Logo.Size() * 0.5f, logoScale, 0, 0);
+
+            Asset<Texture2D> nightLogo = Mod.Assets.Request<Texture2D>("Assets/General/JungleLogoNight");
+            spriteBatch.Draw(nightLogo.Value, logoDrawCenter, null, drawColor * (Main.LogoB / 255f), logoRotation, nightLogo.Size() * 0.5f, logoScale, 0, 0);
+
+            return false;
+        }
+    }
+
+    public class HallowLogo : ModMenu
+    {
+        public override string DisplayName => "Hallow";
+
+        public override Asset<Texture2D> Logo => Mod.Assets.Request<Texture2D>("Assets/General/HallowLogo");
+
+        public override bool PreDrawLogo(SpriteBatch spriteBatch, ref Vector2 logoDrawCenter, ref float logoRotation, ref float logoScale, ref Color drawColor)
+        {
+            if (ModContent.GetInstance<MenuConfig>().MenuOnLeft == true)
+                logoDrawCenter = new Vector2(Main.screenWidth / 5f, Main.screenHeight / 2.2f + ((float)Math.Sin(Main.GlobalTimeWrappedHourly / 1.9f) * 16));
+
+            spriteBatch.Draw(Logo.Value, logoDrawCenter, null, drawColor * (Main.LogoA / 255f), logoRotation, Logo.Size() * 0.5f, logoScale, 0, 0);
+            
+            Asset<Texture2D> nightLogo = Mod.Assets.Request<Texture2D>("Assets/General/HallowLogoNight");
+            spriteBatch.Draw(nightLogo.Value, logoDrawCenter, null, drawColor * (Main.LogoB / 255f), logoRotation, nightLogo.Size() * 0.5f, logoScale, 0, 0);
+
+            return false;
         }
     }
 }

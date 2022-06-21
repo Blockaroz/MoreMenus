@@ -18,7 +18,9 @@ namespace MoreMenus.Content
 
             Asset<Texture2D> texture = Mod.Assets.Request<Texture2D>("Assets/FancyMenuPixeled/Logo");
 
-            Asset<Texture2D> textureBorder = Mod.Assets.Request<Texture2D>("Assets/FancyMenuPixeled/Logo_Border");
+            Asset<Texture2D> textureNight = Mod.Assets.Request<Texture2D>("Assets/FancyMenuPixeled/LogoNight");
+
+            Asset<Texture2D> textureBorder = Mod.Assets.Request<Texture2D>("Assets/FancyMenuPixeled/LogoBorder");
 
             Asset<Texture2D> background = Mod.Assets.Request<Texture2D>("Assets/FancyMenuPixeled/LogoBackground");
 
@@ -51,7 +53,8 @@ namespace MoreMenus.Content
                 }
             }
 
-            spriteBatch.Draw(texture.Value, logoDrawCenter, null, drawColor, logoRotation, texture.Size() * 0.5f, logoScale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(texture.Value, logoDrawCenter, null, drawColor * (Main.LogoA / 255f), logoRotation, texture.Size() * 0.5f, logoScale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(textureNight.Value, logoDrawCenter, null, drawColor * (Main.LogoB / 255f), logoRotation, texture.Size() * 0.5f, logoScale, SpriteEffects.None, 0f);
 
             return false;
         }

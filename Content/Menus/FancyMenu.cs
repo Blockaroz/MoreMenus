@@ -12,20 +12,21 @@ namespace MoreMenus.Content
         public override string DisplayName => "Sharp";
 
         private float _gearRotation = 0;
+
         public override bool PreDrawLogo(SpriteBatch spriteBatch, ref Vector2 logoDrawCenter, ref float logoRotation, ref float logoScale, ref Color drawColor)
         {
             if (ModContent.GetInstance<MenuConfig>().MenuOnLeft == true)
                 logoDrawCenter = new Vector2(Main.screenWidth / 5f, Main.screenHeight / 2.2f + ((float)Math.Sin(Main.GlobalTimeWrappedHourly / 1.9f) * 16));
 
             Asset<Texture2D> gear = Mod.Assets.Request<Texture2D>("Assets/FancyMenu/LogoGear");
-            Asset<Texture2D> gearBorder = Mod.Assets.Request<Texture2D>("Assets/FancyMenu/LogoGear_Border");
+            Asset<Texture2D> gearBorder = Mod.Assets.Request<Texture2D>("Assets/FancyMenu/LogoGearBorder");
 
             Asset<Texture2D> text = Mod.Assets.Request<Texture2D>("Assets/FancyMenu/LogoText");
-            Asset<Texture2D> textBorder = Mod.Assets.Request<Texture2D>("Assets/FancyMenu/LogoText_Border");
+            Asset<Texture2D> textBorder = Mod.Assets.Request<Texture2D>("Assets/FancyMenu/LogoTextBorder");
 
             Asset<Texture2D> tree = Mod.Assets.Request<Texture2D>("Assets/FancyMenu/LogoTree");
-            Asset<Texture2D> treeNight = Mod.Assets.Request<Texture2D>("Assets/FancyMenu/LogoTree_Night");
-            Asset<Texture2D> treeBorder = Mod.Assets.Request<Texture2D>("Assets/FancyMenu/LogoTree_Border");
+            Asset<Texture2D> treeNight = Mod.Assets.Request<Texture2D>("Assets/FancyMenu/LogoTreeNight");
+            Asset<Texture2D> treeBorder = Mod.Assets.Request<Texture2D>("Assets/FancyMenu/LogoTreeBorder");
 
             Asset<Texture2D> background = Mod.Assets.Request<Texture2D>("Assets/FancyMenu/LogoBackground");
             float wave1 = (float)Math.Cos(Main.GlobalTimeWrappedHourly / 1.667f) * 0.133f;
@@ -68,7 +69,8 @@ namespace MoreMenus.Content
             }
 
             spriteBatch.Draw(gear.Value, logoDrawCenter, null, Color.White, _gearRotation, gear.Size() * 0.5f, gearScale, SpriteEffects.None, 0f);
-            spriteBatch.Draw(tree.Value, logoDrawCenter, null, Color.White, logoRotation, tree.Size() * 0.5f, treeScale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(tree.Value, logoDrawCenter, null, Color.White * (Main.LogoA / 255f), logoRotation, tree.Size() * 0.5f, treeScale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(treeNight.Value, logoDrawCenter, null, Color.White * (Main.LogoB / 255f), logoRotation, tree.Size() * 0.5f, treeScale, SpriteEffects.None, 0f);
             spriteBatch.Draw(text.Value, logoDrawCenter, null, Color.White, logoRotation, text.Size() * 0.5f, logoScale, SpriteEffects.None, 0f);
 
             return false;
