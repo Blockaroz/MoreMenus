@@ -26,25 +26,26 @@ namespace MoreMenus.Content
 
             float wave1 = (float)Math.Cos(Main.GlobalTimeWrappedHourly / 1.667f) * 0.133f;
             //logoDrawCenter = new Vector2(Main.screenWidth / 5f, Main.screenHeight / 2.2f + wave0);
-            logoRotation = MathHelper.ToRadians((float)Math.Cos(Main.GlobalTimeWrappedHourly / 1.5f) * 10);
+            //logoRotation = MathHelper.ToRadians((float)Math.Cos(Main.GlobalTimeWrappedHourly / 1.5f) * 10);
 
-            logoScale += wave1 / 2;
+            //logoScale += wave1 / 2;
 
             float wave3 = (float)Math.Cos(Main.GlobalTimeWrappedHourly * 2) * 2;
             float offsetFactor = wave3;
             if (offsetFactor < 0)
                 offsetFactor = 0;
 
-            Color PseudoBlack = new Color(0.137f, 0.137f, 0.176f);
+            Color pseudoBlack = new Color(0.137f, 0.137f, 0.176f).MultiplyRGBA(drawColor);
+            Color insideGradient = Color.Lerp(new Color(114, 158, 161), new Color(158, 141, 181), Main.LogoB / 255f).MultiplyRGBA(drawColor);
 
-            spriteBatch.Draw(background.Value, logoDrawCenter, null, drawColor, logoRotation, texture.Size() * 0.5f, logoScale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(background.Value, logoDrawCenter, null, insideGradient, logoRotation, texture.Size() * 0.5f, logoScale, SpriteEffects.None, 0f);
 
             if (ModContent.GetInstance<MenuConfig>().MenuBorder == true)
             {
                 for (int i = 0; i < 16; i++)
                 {
                     Vector2 offset = new Vector2(offsetFactor + 2f, 0).RotatedBy(MathHelper.PiOver4 * i / 2);
-                    spriteBatch.Draw(textureBorder.Value, logoDrawCenter + offset, null, PseudoBlack, logoRotation, textureBorder.Size() * 0.5f, logoScale, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(textureBorder.Value, logoDrawCenter + offset, null, pseudoBlack, logoRotation, textureBorder.Size() * 0.5f, logoScale, SpriteEffects.None, 0f);
                 }
                 for (int i = 0; i < 4; i++)
                 {

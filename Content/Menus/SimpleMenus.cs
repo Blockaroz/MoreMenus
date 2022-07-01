@@ -72,4 +72,33 @@ namespace MoreMenus.Content
             return false;
         }
     }
+
+    public class MushroomLogo : ModMenu
+    {
+        public override string DisplayName => "Mushroom";
+
+        public override Asset<Texture2D> Logo => Mod.Assets.Request<Texture2D>("Assets/General/MushroomLogo");
+
+        public override void Update(bool isOnTitleScreen)
+        {
+            Main.SmoothedMushroomLightInfluence = MathHelper.Lerp(Main.SmoothedMushroomLightInfluence, 1f, 0.2f);
+        }
+
+        public override bool PreDrawLogo(SpriteBatch spriteBatch, ref Vector2 logoDrawCenter, ref float logoRotation, ref float logoScale, ref Color drawColor)
+        {
+            if (ModContent.GetInstance<MenuConfig>().MenuOnLeft == true)
+                logoDrawCenter = new Vector2(Main.screenWidth / 5f, Main.screenHeight / 2.2f + ((float)Math.Sin(Main.GlobalTimeWrappedHourly / 1.9f) * 16));
+
+            return true;
+        }
+
+        public override void PostDrawLogo(SpriteBatch spriteBatch, Vector2 logoDrawCenter, float logoRotation, float logoScale, Color drawColor)
+        {
+            Asset<Texture2D> glow = Mod.Assets.Request<Texture2D>("Assets/General/MushroomLogoGlow");
+            Color darkBlue = Color.Blue * (logoScale * 0.1f + 0.5f);
+            darkBlue.A = 0;
+
+            spriteBatch.Draw(glow.Value, logoDrawCenter, null, darkBlue, logoRotation, glow.Size() * 0.5f, logoScale, 0, 0);
+        }
+    }
 }

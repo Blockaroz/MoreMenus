@@ -31,10 +31,10 @@ namespace MoreMenus.Content
             Asset<Texture2D> background = Mod.Assets.Request<Texture2D>("Assets/FancyMenu/LogoBackground");
             float wave1 = (float)Math.Cos(Main.GlobalTimeWrappedHourly / 1.667f) * 0.133f;
             float wave2 = (float)Math.Sin(Main.GlobalTimeWrappedHourly / 1.667f) * 0.133f;
-            logoRotation = MathHelper.ToRadians((float)Math.Cos(Main.GlobalTimeWrappedHourly / 1.5f) * 10);
+            //logoRotation = MathHelper.ToRadians((float)Math.Cos(Main.GlobalTimeWrappedHourly / 1.5f) * 10);
 
-            float gearScale = 1 + wave1 / 2;
-            float treeScale = 1 + wave2;
+            //float gearScale = 1 + wave1 / 2;
+            //float treeScale = 1 + wave2;
 
             float wave3 = (float)Math.Cos(Main.GlobalTimeWrappedHourly * 2) * 2;
             float offsetValue = wave3;
@@ -45,33 +45,34 @@ namespace MoreMenus.Content
             if (_gearRotation > MathHelper.TwoPi)
                 _gearRotation = 0;
 
-            Color PseudoBlack = new Color(0.137f, 0.137f, 0.176f);
+            Color pseudoBlack = new Color(35, 35, 46).MultiplyRGBA(drawColor);
+            Color insideGradient = Color.Lerp(new Color(114, 158, 161), new Color(158, 141, 181), Main.LogoB / 255f).MultiplyRGBA(drawColor);
 
-            spriteBatch.Draw(background.Value, logoDrawCenter, null, Color.White, logoRotation, background.Size() * 0.5f, gearScale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(background.Value, logoDrawCenter, null, insideGradient, logoRotation, background.Size() * 0.5f, logoScale, SpriteEffects.None, 0f);
 
             if (ModContent.GetInstance<MenuConfig>().MenuBorder == true)
             {
                 for (int i = 0; i < 8; i++)
                 {
                     Vector2 offset = new Vector2(offsetValue + 2f, 0).RotatedBy(MathHelper.PiOver2 * i / 2);
-                    spriteBatch.Draw(gearBorder.Value, logoDrawCenter + offset, null, PseudoBlack, _gearRotation, gearBorder.Size() * 0.5f, gearScale, SpriteEffects.None, 0f);
-                    spriteBatch.Draw(treeBorder.Value, logoDrawCenter + offset, null, PseudoBlack, logoRotation, treeBorder.Size() * 0.5f, treeScale, SpriteEffects.None, 0f);
-                    spriteBatch.Draw(textBorder.Value, logoDrawCenter + offset, null, PseudoBlack, logoRotation, textBorder.Size() * 0.5f, logoScale, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(gearBorder.Value, logoDrawCenter + offset, null, pseudoBlack, _gearRotation, gearBorder.Size() * 0.5f, logoScale, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(treeBorder.Value, logoDrawCenter + offset, null, pseudoBlack, logoRotation, treeBorder.Size() * 0.5f, logoScale, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(textBorder.Value, logoDrawCenter + offset, null, pseudoBlack, logoRotation, textBorder.Size() * 0.5f, logoScale, SpriteEffects.None, 0f);
                 }
 
                 for (int i = 0; i < 8; i++)
                 {
                     Vector2 offset = new Vector2(offsetValue / 2f, 0).RotatedBy(MathHelper.PiOver2 * i / 2);
-                    spriteBatch.Draw(gearBorder.Value, logoDrawCenter + offset, null, Color.White, _gearRotation, gearBorder.Size() * 0.5f, gearScale, SpriteEffects.None, 0f);
-                    spriteBatch.Draw(treeBorder.Value, logoDrawCenter + offset, null, Color.White, logoRotation, treeBorder.Size() * 0.5f, treeScale, SpriteEffects.None, 0f);
-                    spriteBatch.Draw(textBorder.Value, logoDrawCenter + offset, null, Color.White, logoRotation, textBorder.Size() * 0.5f, logoScale, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(gearBorder.Value, logoDrawCenter + offset, null, drawColor, _gearRotation, gearBorder.Size() * 0.5f, logoScale, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(treeBorder.Value, logoDrawCenter + offset, null, drawColor, logoRotation, treeBorder.Size() * 0.5f, logoScale, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(textBorder.Value, logoDrawCenter + offset, null, drawColor, logoRotation, textBorder.Size() * 0.5f, logoScale, SpriteEffects.None, 0f);
                 }
             }
 
-            spriteBatch.Draw(gear.Value, logoDrawCenter, null, Color.White, _gearRotation, gear.Size() * 0.5f, gearScale, SpriteEffects.None, 0f);
-            spriteBatch.Draw(tree.Value, logoDrawCenter, null, Color.White * (Main.LogoA / 255f), logoRotation, tree.Size() * 0.5f, treeScale, SpriteEffects.None, 0f);
-            spriteBatch.Draw(treeNight.Value, logoDrawCenter, null, Color.White * (Main.LogoB / 255f), logoRotation, tree.Size() * 0.5f, treeScale, SpriteEffects.None, 0f);
-            spriteBatch.Draw(text.Value, logoDrawCenter, null, Color.White, logoRotation, text.Size() * 0.5f, logoScale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(gear.Value, logoDrawCenter, null, drawColor, _gearRotation, gear.Size() * 0.5f, logoScale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(tree.Value, logoDrawCenter, null, drawColor * (Main.LogoA / 255f), logoRotation, tree.Size() * 0.5f, logoScale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(treeNight.Value, logoDrawCenter, null, drawColor * (Main.LogoB / 255f), logoRotation, tree.Size() * 0.5f, logoScale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(text.Value, logoDrawCenter, null, drawColor, logoRotation, text.Size() * 0.5f, logoScale, SpriteEffects.None, 0f);
 
             return false;
         }
